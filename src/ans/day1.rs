@@ -1,8 +1,8 @@
 use std::collections::HashMap;
 
 pub fn part1(mut v1: Vec<i32>, mut v2: Vec<i32>) -> u32 {
-    v1.sort();
-    v2.sort();
+    v1.sort_unstable();
+    v2.sort_unstable();
 
     v1.iter().zip(v2.iter()).map(|(x,y)| (x).abs_diff(*y)).sum()
 }
