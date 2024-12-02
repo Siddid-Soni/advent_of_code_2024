@@ -24,24 +24,47 @@ pub fn part1(lst: Vec<Vec<i32>>) -> i32 {
 }
 
 
-pub fn part2(lst: Vec<Vec<i32>>) -> i32 {
-    let mut n_safe = 0;
-    //Loop over all input
-    'outer: for row in lst {
-        if is_safe(row.clone()) {
-            n_safe +=1;
-            continue;
-        } 
+// time complexity: O(n)
+pub fn part2(lst:Vec<Vec<i32>>) -> i32 {
+    let mut ans = 0;
+    for row in lst {
+        let mut any_ok = false;
 
-        //Check all removal possibilities
-        for i in 0..row.len() {
-            let mut temp_numbers = row.clone();
-            temp_numbers.remove(i);
-            if is_safe(temp_numbers) {
-                n_safe += 1;
-                continue 'outer;
+        let mut consider = |x: usize| {
+            let mut b = row.clone();
+            b.remove(x);
+            if is_safe(b) {
+                any_ok = true;
+            }
+        };
+
+        /* remove any element and check is_safe, if it is still safe
+            -> the element was the problem, we got the solution
+            -> or it was already in safe state 
+        either way we need to increment in ans */
+
+        consider(0);
+        for i in 0..row.len()-1 {
+            let diff = row[i+1] - row[i];
+            if diff.abs() < 1 || diff.abs() > 3 {
+                consider(i);
+                consider(i+1);
+                break;
+            }
+
+            if i+2 < row.len() {
+                let diff2 = row[i+2] - row[i+1];
+                if (diff>0) != (diff2>0) { //different signs
+                    consider(i);
+                    consider(i+1);
+                    consider(i+2);
+                    break;
+                }
             }
         }
-    }
-    n_safe
+        if any_ok {
+            ans += 1;
+        }
+    } 
+    ans
 }
