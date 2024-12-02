@@ -14,3 +14,4 @@ pub fn part2(v1: Vec<i32>, v2: Vec<i32>) -> i32 {
     }
     v1.iter().map(|x| x * map.get(x).unwrap_or(&0)).sum()
 }
+
