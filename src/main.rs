@@ -29,5 +29,5 @@ fn main() {
     println!("===Part 2===");
     let matrix = get_matrix("/home/siddid/advent_of_code/src/input/day2.txt");
     let result = time_snippet!(day2::part2(matrix));
-    println!("Result: {}", result);
+    println!("Result: {}\n", result);
 }
