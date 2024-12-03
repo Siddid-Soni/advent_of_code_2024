@@ -65,4 +65,16 @@ mod tests {
         let matrix = get_matrix("/home/siddid/advent_of_code/src/input/test2.txt");
         assert_eq!(day2::part2(matrix), 4);
     }
+
+    #[test]
+    fn day3_part1() {
+        let input = std::fs::read_to_string("/home/siddid/advent_of_code/src/input/test3.txt").unwrap();
+        assert_eq!(ans::day3::part1(&input), 161);
+    }
+
+    #[test]
+    fn day3_part2() {
+        let input = std::fs::read_to_string("/home/siddid/advent_of_code/src/input/test3.txt").unwrap();
+        assert_eq!(ans::day3::part2(&input), 48);
+    }
 }
